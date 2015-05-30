@@ -6,7 +6,7 @@ Barebones Scala bindings for the [nippy](https://github.com/ptaoussanis/nippy) C
 
 See the [examples](https://github.com/andrewberls/snippy/blob/master/examples/) directory.
 
-```
+```scala
 import snippy.Snippy
 
 Snippy.write("test.nippy", List(1,2,3))
