@@ -5,7 +5,6 @@ import java.io.{BufferedInputStream, BufferedOutputStream,
                 File, FileInputStream, FileOutputStream,
                 IOException}
 import clojure.java.api.Clojure
-import clojure.lang.{Keyword}
 
 object Snippy {
   val require = Clojure.`var`("clojure.core", "require")
