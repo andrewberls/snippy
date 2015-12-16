@@ -10,8 +10,8 @@ See the [examples](https://github.com/andrewberls/snippy/blob/master/examples/) 
 def write(f: File, xs: Seq[Any]): DataOutputStream
 def write(path: String, xs: Seq[Any]): DataOutputStream
 
-def read(f: File): Iterator[Any]
-def read(path: String): Iterator[Any]
+def read(f: File): Stream[Any]
+def read(path: String): Stream[Any]
 ```
 
 ```scala

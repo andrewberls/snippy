@@ -2,7 +2,7 @@ package examples
 
 import scala.collection.JavaConversions._
 import java.util.{HashMap => JHashMap}
-import clojure.lang.{Keyword}
+import clojure.lang.{APersistentMap, Keyword}
 
 import snippy.Snippy
 

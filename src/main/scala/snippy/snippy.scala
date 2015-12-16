@@ -4,6 +4,8 @@ import java.io.{BufferedInputStream, BufferedOutputStream,
                 DataInputStream, DataOutputStream,
                 File, FileInputStream, FileOutputStream,
                 IOException}
+import scala.collection.immutable.Stream
+import scala.util.{Try, Success, Failure}
 import clojure.java.api.Clojure
 
 object Snippy {
@@ -26,34 +28,22 @@ object Snippy {
   def write(path: String, xs: Seq[Any]): DataOutputStream =
     write(new File(path), xs)
 
-  //
-
-  def read(istream: DataInputStream): Iterator[Any] = {
-    new Iterator[Any] {
-      var nextObj: Option[Any] = None
-
-      private def readNext = {
-        try {
-          Some(thawFromStream.invoke(istream))
-        } catch {
-          case ex: IOException => {
-            istream.close()
-            None
-          }
-        }
+  def read(istream: DataInputStream): Stream[Any] = {
+    Try(thawFromStream.invoke(istream)) match {
+      case Success(x) => x #:: read(istream)
+      case Failure(e: IOException) => {
+        istream.close()
+        Stream.empty
       }
-
-      def hasNext = { nextObj = readNext; nextObj.isDefined }
-
-      def next = nextObj.get
+      case Failure(e) => throw e
     }
   }
 
-  def read(f: File): Iterator[Any] = {
+  def read(f: File): Stream[Any] = {
     val istream = new BufferedInputStream(new FileInputStream(f))
     read(new DataInputStream(istream))
   }
 
-  def read(path: String): Iterator[Any] =
+  def read(path: String): Stream[Any] =
     read(new File(path))
 }

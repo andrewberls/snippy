@@ -10,9 +10,9 @@ resolvers += "clojars" at "https://clojars.org/repo"
 
 libraryDependencies ++= Seq(
     "org.scalatest"   %% "scalatest"    % "2.2.4"   % "test,it",
-    "org.scalacheck"  %% "scalacheck"   % "1.12.2"      % "test,it",
-    "org.clojure"     % "clojure"       % "1.6.0",
-    "com.taoensso"    % "nippy"         % "2.8.0"
+    "org.scalacheck"  %% "scalacheck"   % "1.12.2"  % "test,it",
+    "org.clojure"     % "clojure"       % "1.7.0",
+    "com.taoensso"    % "nippy"         % "2.9.0"
 )
 
 scalacOptions ++= List("-feature","-deprecation", "-unchecked", "-Xlint")
